@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+    <div>Hello world</div>
+    <p>
+        User: <span sec:authentication="principal.username"></span>
+        <br><br>
+        Roles: <span sec:authentication="principal.authorities"></span>
+    </p>
+
+    <br>
+    <div sec:authorize="hasRole('MANAGER')">
+        <hr>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+        <br>
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <hr>
+        <a th:href="@{/admin}">System setting for Admin</a>
+        <br>
+    </div>
+    <hr>
+    <!--    Logout button-->
+    <form action="#" method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout" />
+    </form>
+</body>
+</html>
